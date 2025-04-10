@@ -34,7 +34,7 @@ formatter = ColoredFormatter(
     )
 
 
-logger = logging.getLogger('bidd-molmap')
+logger = logging.getLogger('iTarget')
 logger.propagate = False
 
 
