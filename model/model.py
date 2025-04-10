@@ -181,28 +181,21 @@ class MultimapCNN(nn.Module):
         outputs = th.cat((x1, x2, x3),1)
         return outputs
 
-    def Inception1c(self, inputs):
+    def Inception1p(self, inputs):
         x1 = F.relu(self.Incep1conv1_p(inputs))
         x2 = F.relu(self.Incep1conv2_p(inputs))
         x3 = F.relu(self.Incep1conv3_p(inputs))
         outputs = th.cat((x1, x2, x3),1)
         return outputs
 
-    def Inception2c(self, inputs):
+    def Inception2p(self, inputs):
         x1 = F.relu(self.Incep2conv1_p(inputs))
         x2 = F.relu(self.Incep2conv2_p(inputs))
         x3 = F.relu(self.Incep2conv3_p(inputs))
         outputs = th.cat((x1, x2, x3),1)
         return outputs
 
-    def Inception3c(self, inputs):
-        x1 = F.relu(self.Incep3conv1_p(inputs))
-        x2 = F.relu(self.Incep3conv2_p(inputs))
-        x3 = F.relu(self.Incep3conv3_p(inputs))
-        outputs = th.cat((x1, x2, x3),1)
-        return outputs
-
-    def forward(self, drug_inputs, comp_inputs):
+    def forward(self, drug_inputs, prot_inputs):
         ## first inputs
         d_conv1 = F.relu(self.conv1_d(drug_inputs))
         d_pool1 = self.pool1_d(d_conv1)
@@ -211,26 +204,26 @@ class MultimapCNN(nn.Module):
         d_incept2 = self.Inception2d(d_pool2)
 
         ## second inputs
-        c_conv1 = F.relu(self.conv1_p(comp_inputs))
-        c_pool1 = self.pool1_p(c_conv1)
-        c_incept1 = self.Inception1c(c_pool1)
-        c_pool2 = self.pool2_p(c_incept1) #p2
-        c_incept2 = self.Inception2c(c_pool2)
+        p_conv1 = F.relu(self.conv1_p(prot_inputs))
+        p_pool1 = self.pool1_p(p_conv1)
+        p_incept1 = self.Inception1p(p_pool1)
+        p_pool2 = self.pool2_p(p_incept1) #p2
+        p_incept2 = self.Inception2p(p_pool2)
 
         d_flat1 = F.max_pool2d(input=d_incept2, kernel_size=d_incept2.size()[2:]).squeeze(-1).squeeze(-1) # global pooling
-        c_flat1 = F.max_pool2d(input=c_incept2, kernel_size=c_incept2.size()[2:]).squeeze(-1).squeeze(-1) # global pooling
+        p_flat1 = F.max_pool2d(input=p_incept2, kernel_size=p_incept2.size()[2:]).squeeze(-1).squeeze(-1) # global pooling
 
         ## concat
-        x = th.cat((d_flat1, c_flat1),1)
+        x = th.cat((d_flat1, p_flat1),1)
 
         if self.captum:
             return x
         else:
-            return x, d_flat1, c_flat1
+            return x, d_flat1, p_flat1
         
-    def get_logits(self, drug_inputs, comp_inputs):
+    def get_logits(self, drug_inputs, prot_inputs):
         
-        x, d_flat1, c_flat1 = self.forward(drug_inputs, comp_inputs)
+        x, d_flat1, p_flat1 = self.forward(drug_inputs, prot_inputs)
  
         ## dense layer
         x = self.dense_avf(self.dense1(x))
@@ -351,11 +344,11 @@ class MultimapCNN(nn.Module):
                 X = [x.to(self.device) for x in X]
                 embed, _d, _p = self(X[0],X[1])
                 pred = self.get_logits(X[0],X[1])
-                run_logits.append(pred)
-                latents_d.append(_d)
-                latents_p.append(_p)
-        run_logits=th.cat(run_logits, dim=0).cpu()
-        latents_d=th.cat(latents_d, dim=0).cpu().detach().numpy()
-        latents_p=th.cat(latents_p, dim=0).cpu().detach().numpy()
+                run_logits.append(pred.cpu())
+                latents_d.append(_d.cpu().detach().numpy())
+                latents_p.append(_p.cpu().detach().numpy())
+        run_logits=th.cat(run_logits, dim=0)
+        latents_d=np.concatenate(latents_d, axis=0)
+        latents_p=np.concatenate(latents_p, axis=0)
         return run_logits, latents_d, latents_p
 
