@@ -1,0 +1,12 @@
+md5: 7934399d84a763cb54150d61235e5ac0
+frozen: true
+deps:
+- checksum: '"1e10cf11-64ffbcb45d180"'
+  size: 504418065
+  hash: md5
+  path: http://47.88.56.212/iTarget/ChEMBL_data.csv
+outs:
+- md5: 0e6877a8b3f70a5bbb95f6f7c6899e6c
+  size: 504418065
+  hash: md5
+  path: ChEMBL_data.csv

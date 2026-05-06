@@ -1,0 +1,12 @@
+md5: d7cde4074b14b201d82552ab83ee7638
+frozen: true
+deps:
+- checksum: '"d5f4139c-64ffc772c2a80"'
+  size: 3589542812
+  hash: md5
+  path: http://47.88.56.212/iTarget/iTarget.tar.gz
+outs:
+- md5: e584f260801411790f65551f28d76c6f
+  size: 3589542812
+  hash: md5
+  path: iTarget.tar.gz

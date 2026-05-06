@@ -1,0 +1,12 @@
+md5: 4a9dd7bdaabbfd75b4f2380c8859b52c
+frozen: true
+deps:
+- checksum: '"8043421-64ffbb091e180"'
+  size: 134493217
+  hash: md5
+  path: http://47.88.56.212/iTarget/esm2_fitted.mp
+outs:
+- md5: 9b44ab20dad377a81b3eae99efc64dd5
+  size: 134493217
+  hash: md5
+  path: esm2_fitted.mp

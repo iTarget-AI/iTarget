@@ -1,0 +1,12 @@
+md5: f061f782a16d1d892b389de72b4b5664
+frozen: true
+deps:
+- checksum: '"3e17a000-604334d7aca80"'
+  size: 1041735680
+  hash: md5
+  path: http://47.88.56.212/iTarget/step_400000_20200326221400.tar
+outs:
+- hash: md5
+  path: step_400000_20200326221400.tar
+  md5: 6491f38215ddbe080f561a8e1b1b5a46
+  size: 1041735680
