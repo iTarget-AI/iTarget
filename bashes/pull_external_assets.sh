@@ -4,6 +4,7 @@ set -euo pipefail
 # This repository tracks large assets as URL-backed DVC imports rather than a
 # configured DVC remote. Use `dvc update` to fetch them on a new machine.
 
+dvc init
 dvc update _conda_envs/iTarget.tar.gz.dvc
 dvc update _ForFeatures/xmol/FT_to_embedding/python.tar.gz.dvc
 dvc update _ForFeatures/xmol/FT_to_embedding/data/model/step_400000/step_400000_20200326221400.tar.dvc
