@@ -29,6 +29,8 @@ The Conda environment keeps the legacy name `iTarget`. The inference scripts act
 
 If resource download or environment setup fails, see [Troubleshooting and Manual Installation](#troubleshooting-and-manual-installation).
 
+---
+
 ## Workflow Guide
 
 | Goal | Section |
