@@ -29,11 +29,12 @@ The Conda environment keeps the legacy name `iTarget`. The inference scripts act
 
 If resource download or environment setup fails, see [Troubleshooting and Manual Installation](#troubleshooting-and-manual-installation).
 
-## Which Workflow Should I Use?
+## Workflow Guide
 
-| Goal | Go to |
+| Goal | Section |
 | --- | --- |
-| Run the pretrained model on example or custom inputs | [Inference](#inference) |
+| Run the default inference example with the shortest commands | [Quick Start](#quick-start) |
+| Understand or modify the inference input, output, and uncertainty score | [Inference](#inference) |
 | Reproduce the default training workflow | [Training and Reproduction](#training-and-reproduction) |
 | Build custom feature maps/templates | [Advanced Customization](#advanced-customization) |
 | Fix resource download or environment setup issues | [Troubleshooting and Manual Installation](#troubleshooting-and-manual-installation) |
